@@ -21,9 +21,18 @@ COPY . .
 # Install Laravel dependencies
 RUN composer install --no-dev --optimize-autoloader
 
-# Set permissions for storage and cache
+# Set permissions for storage and bootstrap/cache
 RUN chown -R www-data:www-data /var/www/html/storage /var/www/html/bootstrap/cache \
-    && chmod -R 755 /var/www/html/storage /var/www/html/bootstrap/cache
+    && chmod -R 775 /var/www/html/storage /var/www/html/bootstrap/cache
+
+# Set Apache DocumentRoot to the Laravel 'public' folder
+RUN sed -i 's|/var/www/html|/var/www/html/public|' /etc/apache2/sites-available/000-default.conf
+
+# Enable Apache mod_rewrite for URL routing
+RUN a2enmod rewrite
+
+# Restart Apache to apply changes
+RUN apache2ctl restart
 
 # Expose port 80
 EXPOSE 80
