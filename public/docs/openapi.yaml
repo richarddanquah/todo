@@ -1,0 +1,268 @@
+openapi: 3.0.3
+info:
+  title: Laravel
+  description: ''
+  version: 1.0.0
+servers:
+  -
+    url: 'http://localhost'
+paths:
+  /api/todos:
+    get:
+      summary: 'Display a listing of the resource.'
+      description: ''
+      parameters:
+        -
+          in: header
+          name: Content-Type
+          description: ''
+          example: application/json
+          schema:
+            type: string
+        -
+          in: header
+          name: Accept
+          description: ''
+          example: application/json
+          schema:
+            type: string
+      responses:
+        200:
+          description: ''
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  type: object
+                example:
+                  -
+                    id: 1
+                    title: 'Buy groceries'
+                    details: 'Buy milk, bread, and eggs'
+                    status: 'not started'
+                    created_at: '2024-12-16T15:38:04.000000Z'
+                    updated_at: '2024-12-16T15:38:04.000000Z'
+                  -
+                    id: 2
+                    title: 'Buy vegetables'
+                    details: 'Buy milk, bread, and eggs'
+                    status: 'not started'
+                    created_at: '2024-12-16T15:38:36.000000Z'
+                    updated_at: '2024-12-16T15:38:36.000000Z'
+      tags:
+        - Endpoints
+      security: []
+    post:
+      summary: 'Store a newly created resource in storage.'
+      description: ''
+      parameters:
+        -
+          in: header
+          name: Content-Type
+          description: ''
+          example: application/json
+          schema:
+            type: string
+        -
+          in: header
+          name: Accept
+          description: ''
+          example: application/json
+          schema:
+            type: string
+      responses: {  }
+      tags:
+        - Endpoints
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                title:
+                  type: string
+                  description: 'Must not be greater than 255 characters.'
+                  example: hrrrmlykqvooddnlyzffwebvhukgmwyxdzzugvqrvnpsrrkcqxuamjrazsjplizjfpjydzjjtyqidnugutdmwahwavhrywprvqx
+                details:
+                  type: string
+                  description: ''
+                  example: eos
+                status:
+                  type: string
+                  description: 'Must be one of <code>completed</code>, <code>in progress</code>, or <code>not started</code>.'
+                  example: 'in progress'
+              required:
+                - title
+                - status
+      security: []
+  '/api/todos/{id}':
+    get:
+      summary: 'Display the specified resource.'
+      description: ''
+      parameters:
+        -
+          in: header
+          name: Content-Type
+          description: ''
+          example: application/json
+          schema:
+            type: string
+        -
+          in: header
+          name: Accept
+          description: ''
+          example: application/json
+          schema:
+            type: string
+      responses:
+        200:
+          description: ''
+          content:
+            application/json:
+              schema:
+                type: object
+                example:
+                  id: 1
+                  title: 'Buy groceries'
+                  details: 'Buy milk, bread, and eggs'
+                  status: 'not started'
+                  created_at: '2024-12-16T15:38:04.000000Z'
+                  updated_at: '2024-12-16T15:38:04.000000Z'
+                properties:
+                  id:
+                    type: integer
+                    example: 1
+                  title:
+                    type: string
+                    example: 'Buy groceries'
+                  details:
+                    type: string
+                    example: 'Buy milk, bread, and eggs'
+                  status:
+                    type: string
+                    example: 'not started'
+                  created_at:
+                    type: string
+                    example: '2024-12-16T15:38:04.000000Z'
+                  updated_at:
+                    type: string
+                    example: '2024-12-16T15:38:04.000000Z'
+      tags:
+        - Endpoints
+      security: []
+    put:
+      summary: 'Update the specified resource in storage.'
+      description: ''
+      parameters:
+        -
+          in: header
+          name: Content-Type
+          description: ''
+          example: application/json
+          schema:
+            type: string
+        -
+          in: header
+          name: Accept
+          description: ''
+          example: application/json
+          schema:
+            type: string
+      responses: {  }
+      tags:
+        - Endpoints
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                title:
+                  type: string
+                  description: 'Must not be greater than 255 characters.'
+                  example: bgtbmssqvfhohrlrna
+                details:
+                  type: string
+                  description: ''
+                  example: quas
+                status:
+                  type: string
+                  description: 'Must be one of <code>completed</code>, <code>in progress</code>, or <code>not started</code>.'
+                  example: 'in progress'
+              required:
+                - title
+                - status
+      security: []
+    delete:
+      summary: 'Remove the specified resource from storage.'
+      description: ''
+      parameters:
+        -
+          in: header
+          name: Content-Type
+          description: ''
+          example: application/json
+          schema:
+            type: string
+        -
+          in: header
+          name: Accept
+          description: ''
+          example: application/json
+          schema:
+            type: string
+      responses: {  }
+      tags:
+        - Endpoints
+      security: []
+    parameters:
+      -
+        in: path
+        name: id
+        description: 'The ID of the todo.'
+        example: 1
+        required: true
+        schema:
+          type: integer
+  /api/user:
+    get:
+      summary: ''
+      description: ''
+      parameters:
+        -
+          in: header
+          name: Content-Type
+          description: ''
+          example: application/json
+          schema:
+            type: string
+        -
+          in: header
+          name: Accept
+          description: ''
+          example: application/json
+          schema:
+            type: string
+      responses:
+        401:
+          description: ''
+          content:
+            application/json:
+              schema:
+                type: object
+                example:
+                  message: Unauthenticated.
+                properties:
+                  message:
+                    type: string
+                    example: Unauthenticated.
+      tags:
+        - Endpoints
+      security: []
+tags:
+  -
+    name: Endpoints
+    description: ''
