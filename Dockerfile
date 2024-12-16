@@ -31,11 +31,11 @@ RUN sed -i 's|/var/www/html|/var/www/html/public|' /etc/apache2/sites-available/
 # Enable Apache mod_rewrite for URL routing
 RUN a2enmod rewrite
 
-# Restart Apache to apply changes
-RUN apache2ctl restart
+# Set ServerName to suppress warning
+RUN echo "ServerName localhost" >> /etc/apache2/apache2.conf
 
 # Expose port 80
 EXPOSE 80
 
-# Start Apache
+# Start Apache in the foreground when the container runs
 CMD ["apache2-foreground"]
